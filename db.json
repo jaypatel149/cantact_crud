@@ -26,6 +26,20 @@
       "mobile": "1234567890",
       "address": "bihar",
       "id": 4
+    },
+    {
+      "name": "aniket",
+      "email": "aniket@gmail.com",
+      "mobile": "8765432190",
+      "address": "himachal",
+      "id": 5
+    },
+    {
+      "name": "amit",
+      "email": "amit@gmail.com",
+      "mobile": "0987654321",
+      "address": "jaunpur",
+      "id": 6
     }
   ]
 }

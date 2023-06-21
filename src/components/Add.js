@@ -1,43 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Add.css";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { useForm } from "react-hook-form";
 
+const Add = ({ onCloseForm }) => {
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm();
 
-const Add = ({onCloseForm}) => {
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    mobile: "",
-    address: "",
-  });
- 
-
-
-
-  const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleFormSubmit = (event) => {
-    event.preventDefault();
-
-    axios.post("http://localhost:3001/contacts", formData)
+  const handleFormSubmit = (data) => {
+    axios
+      .post("http://localhost:3001/contacts", data)
       .then((response) => {
         console.log(response.data);
         toast.success("Contact added successfully");
-        // Reset the form after successful submission
-        setFormData({ name: "", email: "", mobile: "", address: "" });
+        reset(); // Reset the form after successful submission
+        onCloseForm();
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  const handleFormReset = () => {
-    setFormData({ name: "", email: "", mobile: "", address: "" });
+  const validateMobileNumber = (value) => {
+    const isValid = /^\d{10}$/.test(value);
+    return isValid || 'Please enter a valid 10-digit mobile number';
   };
+
 
   return (
     <div className="card">
@@ -51,18 +44,17 @@ const Add = ({onCloseForm}) => {
         ></button>
       </div>
       <hr />
-      <form onSubmit={handleFormSubmit}>
+      <form onSubmit={handleSubmit(handleFormSubmit)}>
         <div className="form-group mb-3">
           <label htmlFor="name">Name:</label>
           <input
             type="text"
             id="name"
-            name="name"
+            {...register("name", { required: true })}
             placeholder="Enter your name"
-            value={formData.name}
-            onChange={handleInputChange}
             className="form-control"
           />
+          {errors.name && <span className="text-danger">Name is required</span>}
         </div>
 
         <div className="form-group mb-3">
@@ -70,12 +62,15 @@ const Add = ({onCloseForm}) => {
           <input
             type="email"
             id="email"
-            name="email"
+            {...register("email", { required: true, pattern: /^\S+@\S+$/i })}
             placeholder="Enter your email"
-            value={formData.email}
-            onChange={handleInputChange}
             className="form-control"
           />
+          {errors.email && (
+            <span className="text-danger">
+              Please enter a valid email address
+            </span>
+          )}
         </div>
 
         <div className="form-group mb-3">
@@ -83,24 +78,26 @@ const Add = ({onCloseForm}) => {
           <input
             type="text"
             id="mobile"
-            name="mobile"
+            {...register('mobile', { required: true, validate: validateMobileNumber })}
             placeholder="Enter your mobile number"
-            value={formData.mobile}
-            onChange={handleInputChange}
             className="form-control"
           />
+          {errors.mobile && (
+            <span className="text-danger">Mobile is required</span>
+          )}
         </div>
 
         <div className="form-group mb-3">
           <label htmlFor="address">Address:</label>
           <textarea
             id="address"
-            name="address"
+            {...register("address", { required: true })}
             placeholder="Enter your address"
-            value={formData.address}
-            onChange={handleInputChange}
             className="form-control"
           ></textarea>
+          {errors.address && (
+            <span className="text-danger">Address is required</span>
+          )}
         </div>
 
         <div className="form-group mb-3">
@@ -109,7 +106,7 @@ const Add = ({onCloseForm}) => {
           </button>
           <button
             type="button"
-            onClick={handleFormReset}
+            onClick={() => reset()}
             className="btn btn-dark"
           >
             Reset
