@@ -1,0 +1,31 @@
+{
+  "contacts": [
+    {
+      "id": 1,
+      "name": "Aaron",
+      "mobile": "5785664545",
+      "email": "aaron@gmail.com",
+      "address": "Us .united"
+    },
+    {
+      "id": 2,
+      "name": "Buincy Hanson",
+      "mobile": "5785664545",
+      "email": "hanson@gmail.com"
+    },
+    {
+      "name": "Jayprakash Patel ",
+      "email": "jaiprakash18@navgurukul.org",
+      "mobile": "9082100916",
+      "address": "navgurukul dharamsala himanchal pradesh\ndharamsala",
+      "id": 3
+    },
+    {
+      "name": "suraj kumar ",
+      "email": "suraj@gmail.com",
+      "mobile": "1234567890",
+      "address": "bihar",
+      "id": 4
+    }
+  ]
+}

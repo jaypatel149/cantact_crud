@@ -1,0 +1,48 @@
+.conatiner {
+  margin: 5rem auto;
+}
+
+.add {
+  background-color: #87ceeb;
+  color: white;
+  border: 1px solid #87ceeb;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 20px;
+}
+
+
+.card-item{
+  background: white;
+  color: black;
+  border: 1px solid #87ceeb;
+  padding: 13px;
+  border-radius: 8px;
+  font-size: 18px;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+}
+
+.name{
+  font-size: 14px;
+  color: #000000a8;
+}
+
+
+.seach-input{
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.seach-input input{
+  width: 50%;
+  padding: 10px;
+  border-radius: 5px;
+}
