@@ -26,12 +26,6 @@ const Add = ({ onCloseForm }) => {
       });
   };
 
-  const validateMobileNumber = (value) => {
-    const isValid = /^\d{10}$/.test(value);
-    return isValid || 'Please enter a valid 10-digit mobile number';
-  };
-
-
   return (
     <div className="card">
       <div className="d-flex justify-content-between align-items-center">
@@ -78,12 +72,15 @@ const Add = ({ onCloseForm }) => {
           <input
             type="text"
             id="mobile"
-            {...register('mobile', { required: true, validate: validateMobileNumber })}
+            {...register('mobile', { 
+              required: true, 
+              pattern: /^\d{10}$/ 
+            })}        
             placeholder="Enter your mobile number"
             className="form-control"
           />
           {errors.mobile && (
-            <span className="text-danger">Mobile is required</span>
+            <span className="text-danger">Please enter a valid 10-digit mobile number</span>
           )}
         </div>
 

@@ -26,7 +26,7 @@ const ShowDetail = () => {
 
   useEffect(() => {
     fetchContacts();
-  });
+  },[]);
   const fetchContacts = ()=>{
     axios.get("http://localhost:3001/contacts").then((response) => {
       setContact(response.data);
@@ -40,7 +40,7 @@ const ShowDetail = () => {
         setContact((prevContacts) =>
           prevContacts.filter((contact) => contact.id !== id)
         );
-        toast.error("Contact deleted successfully");
+        toast.success("Contact deleted successfully");
       }
     });
   };
@@ -90,7 +90,7 @@ const ShowDetail = () => {
           <div className="seach-input">
             <input
               type="text"
-              class="form-control"
+              className="form-control"
               placeholder="Search Contact"
               value={searchQuery}
               onChange={handleSearch}
